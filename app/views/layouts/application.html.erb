@@ -9,6 +9,25 @@
   </head>
 
   <body>
+  	<div id="sidebar">
+  		<div id="logo">
+			<%= link_to root_path do %>
+				<%= image_tag "logo.png" %>
+			<% end %> 			
+  		</div>
+
+  		<ul>
+  			<li class="category">Website</li>
+  			<li><%= link_to "Blog", root_path %></li>
+  			<li>About</li>
+  		</ul>
+
+  		<ul>
+  			<li class="category">Social</li>
+  			<li><a href="https://github.com/Sir-Turtle">Github</a></li>
+  			<li><a href="mailto:hey@tolgaakkaya.me">Email</a></li>
+  		</ul>
+  	</div>
     <%= yield %>
   </body>
 </html>
