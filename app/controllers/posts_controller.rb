@@ -11,6 +11,7 @@ class PostsController < ApplicationController
 
 	def create
 		@post = Post.new(post_params)
+		@post.user_id = current_user.id
 
 		if @post.save
 			redirect_to @post
@@ -25,27 +26,39 @@ class PostsController < ApplicationController
 
 	def edit
 		@post = Post.find(params[:id])
+
+		if is_current_user_owner(@post)
+			render 'edit'
+		end
 	end
 
 	def update
 		@post = Post.find(params[:id])
 
-		if @post.update(params[:post].permit(:title, :body))
-			redirect_to @post
-		else
-			render 'edit'
+		if is_current_user_owner(@post)
+			if @post.update(params[:post].permit(:title, :body))
+				redirect_to @post
+			else
+				render 'edit'
+			end
 		end
 	end
 
 	def destroy
 		@post = Post.find(params[:id])
-		@post.destroy
 
-		redirect_to root_path
+		if is_current_user_owner(@post)
+			@post.destroy
+			redirect_to root_path
+		end
 	end
 
 	private
 		def post_params
 			params.require(:post).permit(:title, :body)
+		end
+
+		def is_current_user_owner(post)
+			post.user_id == current_user.id
 		end
 end
