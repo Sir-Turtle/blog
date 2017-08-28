@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+	include Pundit
 	before_action :authenticate_user!, except: [:index, :show]
 
 	def index
@@ -11,8 +12,8 @@ class PostsController < ApplicationController
 
 	def create
 		@post = Post.new(post_params)
-		@post.user_id = current_user.id
 
+		authorize @post
 		if @post.save
 			redirect_to @post
 		else
@@ -27,9 +28,8 @@ class PostsController < ApplicationController
 	def edit
 		@post = Post.find(params[:id])
 
-		if is_current_user_owner(@post)
-			render 'edit'
-		end
+		authorize @post
+		render 'edit'
 	end
 
 	def update
@@ -46,18 +46,13 @@ class PostsController < ApplicationController
 	def destroy
 		@post = Post.find(params[:id])
 
-		if is_current_user_owner(@post)
-			@post.destroy
-			redirect_to root_path
-		end
+		authorize @post
+		@post.destroy
+		redirect_to root_path
 	end
 
 	private
 		def post_params
 			params.require(:post).permit(:title, :body)
-		end
-
-		def is_current_user_owner(post)
-			post.user_id == current_user.id
 		end
 end

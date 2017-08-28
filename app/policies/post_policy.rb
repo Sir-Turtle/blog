@@ -12,11 +12,19 @@ class PostPolicy < ApplicationPolicy
 	    @post = post
 	end
 
+	def create?
+		user.admin?
+	end
+
 	def edit?
-		post.user_id == current_user.id
+		user.admin?
 	end
 
 	def update?
-		post.user_id == current_user.id
+		user.admin?
+	end
+
+	def destroy?
+		user.admin?
 	end
 end
