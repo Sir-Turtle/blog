@@ -35,12 +35,11 @@ class PostsController < ApplicationController
 	def update
 		@post = Post.find(params[:id])
 
-		if is_current_user_owner(@post)
-			if @post.update(params[:post].permit(:title, :body))
-				redirect_to @post
-			else
-				render 'edit'
-			end
+		authorize @post
+		if @post.update(params[:post].permit(:title, :body))
+			redirect_to @post
+		else
+			render 'edit'
 		end
 	end
 
