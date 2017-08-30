@@ -8,12 +8,13 @@ class PostsController < ApplicationController
 
 	def new
 		@post = Post.new
+		authorize @post, :edit?
 	end
 
 	def create
 		@post = Post.new(post_params)
 
-		authorize @post
+		authorize @post, :edit?
 		if @post.save
 			redirect_to @post
 		else
@@ -35,7 +36,7 @@ class PostsController < ApplicationController
 	def update
 		@post = Post.find(params[:id])
 
-		authorize @post
+		authorize @post, :edit?
 		if @post.update(params[:post].permit(:title, :body))
 			redirect_to @post
 		else
@@ -46,7 +47,7 @@ class PostsController < ApplicationController
 	def destroy
 		@post = Post.find(params[:id])
 
-		authorize @post
+		authorize @post, :edit?
 		@post.destroy
 		redirect_to root_path
 	end
