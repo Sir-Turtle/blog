@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   		resources :comments
 	end
 
+	put 'posts/:id' => 'posts#publish'
+
 	get '/about', to: 'pages#about'
 
 	devise_for :users, path_names: {

@@ -11,12 +11,21 @@ class PostsController < ApplicationController
 
 	def create
 		@post = Post.new(post_params)
+		@post.user_id = current_user.id
 
 		if @post.save
 			redirect_to @post
 		else
 			render 'new'
 		end
+	end
+
+	def publish
+		@post = Post.find(params[:id])
+
+		authorize @post, :edit?
+		@post.published = true
+		redirect_to @post
 	end
 
 	def show
@@ -49,3 +58,4 @@ class PostsController < ApplicationController
 			params.require(:post).permit(:title, :body)
 		end
 end
+
