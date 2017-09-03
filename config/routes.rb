@@ -4,10 +4,9 @@ Rails.application.routes.draw do
 	root "posts#index"
   
   	resources :posts do
+  		put 'publish', on: :member, as: :publish
   		resources :comments
 	end
-
-	put 'posts/:id' => 'posts#publish'
 
 	get '/about', to: 'pages#about'
 

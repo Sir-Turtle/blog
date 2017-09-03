@@ -25,7 +25,13 @@ class PostsController < ApplicationController
 
 		authorize @post, :edit?
 		@post.published = true
-		redirect_to @post
+
+		if @post.save
+			logger.info "Post is successfully saved after publish"
+			redirect_to @post
+		else
+			#display error message
+		end
 	end
 
 	def show
