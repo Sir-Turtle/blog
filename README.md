@@ -1,24 +1,10 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+I'm developing this web application to use as my personal blog, or at least that's the initial plan. I will write about books I'm reading, events I'm attending and/or volunteering for such as Ladies Learning Code, places I travel to, and other causes I want to spread awareness about like people with disabilities/mental health/minorities in need of help, etc.
 
-Things you may want to cover:
+Environment details:
+* Ruby version: 2.4.0p0
+* Rails version: 5.0.2
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Dependencies:
+* psql version: 9.6.1
