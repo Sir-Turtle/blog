@@ -40,9 +40,9 @@
         <% end %>
         <% if user_signed_in? %>
     			<div class="buttons">
-            <%#- if policy_scope(@user.posts) %>
+            <% if (@posts && policy(@posts).edit?) || (@post && policy(@post).edit?) %>
     	  			<button class="button"><%= link_to "New Post", new_post_path %></button>
-            <%#- end %>
+            <% end %>
   	  			<button class="button"><%= link_to "Logout", destroy_user_session_path, :method => :delete %></button>
   	  		</div>
         <% end %>
