@@ -1,7 +1,11 @@
 class PostPolicy < ApplicationPolicy
 	class Scope < Scope
 		def resolve
-			scope
+			if user.admin?
+				scope.all
+			else
+				scope.where(published: true)
+			end
 		end
 	end
 
