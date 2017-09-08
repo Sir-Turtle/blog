@@ -39,17 +39,17 @@
           <%= link_to "Back to All Posts", root_path %>
         <% end %>
         <% if user_signed_in? %>
-    			<div class="buttons">
+    			<div class="pull-right">
             <% if (@posts && policy(@posts).edit?) || (@post && policy(@post).edit?) %>
-    	  			<button class="button"><%= link_to "New Post", new_post_path %></button>
+    	  			<button class="btn btn-default"><%= link_to "New Post", new_post_path %></button>
             <% end %>
-  	  			<button class="button"><%= link_to "Logout", destroy_user_session_path, :method => :delete %></button>
+  	  			<button class="btn btn-default"><%= link_to "Logout", destroy_user_session_path, :method => :delete %></button>
   	  		</div>
         <% end %>
         <% if !user_signed_in? %>
-          <div class="buttons">
-            <button class="button"><%= link_to "Register", new_user_registration_path %></button>
-            <button class="button"><%= link_to "Login", new_user_session_path %></button>
+          <div class="pull-right">
+            <button class="btn btn-default"><%= link_to "Register", new_user_registration_path %></button>
+            <button class="btn btn-default"><%= link_to "Login", new_user_session_path %></button>
           </div>
         <% end %>
   		</div>
