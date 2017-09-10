@@ -13,6 +13,10 @@ class PostPolicy < ApplicationPolicy
 	end
 
 	def edit?
-		user.admin?
+		if(user)
+			user.admin?
+		else
+			false
+		end
 	end
 end
