@@ -7,7 +7,7 @@ class SubscriberMailer < ApplicationMailer
     	mail(to: @user.email, subject: 'Subcribed to Tolga')
 	end
 
-	def new_post_notification(user)
+	def new_post_email(user)
     	@user = user
     	@url  = 'http://tolgaakkaya.com/'
     	mail(to: @user.email, subject: 'New Post by Tolga')
